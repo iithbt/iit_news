@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import dj_database_url
+import dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +27,7 @@ SECRET_KEY = 'f$+1*7p2vfhwjk4n^u4(h=p&6moi(i1o202l&m96ql(k=y7s6!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['iithbt.herokuapp.com']
+ALLOWED_HOSTS = ['iithbt.herokuapp.com','localhost']
 
 
 # Application definition
@@ -75,17 +77,24 @@ WSGI_APPLICATION = 'iit_news.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+# Update database configuration with $DATABASE_URL.
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'testdb',
-        'USER': 'chirag',
-        'PASSWORD': 'test1234',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+if 'DATABASE_URL' not in os.environ:
+    dotenv.load()
+
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config()
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'testdb',
+#         'USER': 'chirag',
+#         'PASSWORD': 'test1234',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
