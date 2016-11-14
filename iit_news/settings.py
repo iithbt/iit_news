@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'iit_news.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'testdb',
+        'USER': 'chirag',
+        'PASSWORD': 'test1234',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -105,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
