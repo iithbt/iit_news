@@ -1,0 +1,1 @@
+web: gunicorn iit_news.wsgi:application --log-file -

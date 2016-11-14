@@ -1,3 +1,4 @@
+psycopg2==2.6.1
 celery==4.0.0
 Django==1.10.3
 django-celery-beat==1.0.1
@@ -5,4 +6,6 @@ djangorestframework==3.5.3
 feedparser==5.2.1
 beautifulsoup4==4.5.1
 redis==2.10.5
-
+dj-database-url==0.4.1
+dj-static==0.0.6
+gunicorn==19.6.0
