@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from time import mktime
 from datetime import datetime
-from .models import NewsArticles
+from .models import NewsArticle
 from feedparser import parse
 
 
@@ -16,12 +16,12 @@ def loadfeed(url):
 	return parse(url)
 
 def processFeedItem(item):
-	query = NewsArticles.objects.filter(post_id=item.id) #fine tune this later
+	query = NewsArticle.objects.filter(post_id=item.id) #fine tune this later
 	if len(query) > 0:
 		return
 	summaryText, img_src, source = parseSummary(item.summary)
 	url = parseFeedUrl(item.link)
-	n = NewsArticles ( post_id = item.id,
+	n = NewsArticle ( post_id = item.id,
 		title = item.title,
 		pub_date = getPubDate(item.published_parsed),
 		summary = summaryText,
