@@ -1,11 +1,15 @@
 from bs4 import BeautifulSoup
 from time import mktime
 from datetime import datetime
+from django.utils import timezone
 from .models import NewsArticle
 from feedparser import parse
 
+import sys
 
 def main():
+	reload(sys)
+	sys.setdefaultencoding('utf-8')
 	url = 'https://news.google.co.in/news?cf=all&hl=en&pz=1&ned=in&output=rss&q=iit'
 	feed = loadfeed(url)
 	for item in feed.entries:
@@ -33,13 +37,13 @@ def processFeedItem(item):
 
 
 def getPubDate(time_struct):
-	return datetime.fromtimestamp(mktime(time_struct))
+	return datetime.fromtimestamp(mktime(time_struct),timezone.utc)
 
 def parseSummary(summary):
 	soup = BeautifulSoup(summary, 'html.parser')
 	s = soup.find("div", "lh").find_all("font")
-	source = s[0].text.encode("ascii")
-	summaryText = s[2].text.encode("ascii")
+	source = s[0].text
+	summaryText = s[2].text
 	img_src = soup.find("img").get("src")
 	return summaryText, img_src, source 
 

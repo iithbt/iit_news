@@ -9,7 +9,7 @@ class NewsArticle(models.Model):
 	title = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date published')
 	summary = models.CharField(max_length=500)
-	img_src = models.CharField(max_length=200)
+	img_src = models.CharField(max_length=200,blank=True,null=True)
 	url = models.CharField(max_length=200)
 	source = models.CharField(max_length=50)
 
