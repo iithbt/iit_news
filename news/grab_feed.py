@@ -10,11 +10,13 @@ import sys
 def main():
 	reload(sys)
 	sys.setdefaultencoding('utf-8')
-	url = 'https://news.google.co.in/news?cf=all&hl=en&pz=1&ned=in&output=rss&q=iit'
+	count = 0
+	url = 'https://news.google.co.in/news?q=iit&hl=en&gl=in&output=rss'
 	feed = loadfeed(url)
 	for item in feed.entries:
-		processFeedItem(item)
-	return
+		if processFeedItem(item):
+			count += 1
+	return count
 
 def loadfeed(url):
 	return parse(url)
@@ -22,7 +24,7 @@ def loadfeed(url):
 def processFeedItem(item):
 	query = NewsArticle.objects.filter(post_id=item.id) #fine tune this later
 	if len(query) > 0:
-		return
+		return False
 	summaryText, img_src, source = parseSummary(item.summary)
 	url = parseFeedUrl(item.link)
 	n = NewsArticle ( post_id = item.id,
@@ -33,7 +35,7 @@ def processFeedItem(item):
 		url = url,
 		source = source)
 	n.save()
-	return
+	return True
 
 
 def getPubDate(time_struct):
