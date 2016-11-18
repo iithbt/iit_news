@@ -11,7 +11,7 @@ class NewsArticleSerializer(serializers.HyperlinkedModelSerializer):
 
 # ViewSets define the view behavior.
 class NewsArticleViewSet(viewsets.ModelViewSet):
-    queryset = NewsArticle.objects.all()
+    queryset = NewsArticle.objects.all().order_by('-pub_date')
     serializer_class = NewsArticleSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.
