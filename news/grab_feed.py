@@ -27,8 +27,11 @@ def processFeedItem(item):
 		return False
 	summaryText, img_src, source = parseSummary(item.summary)
 	url = parseFeedUrl(item.link)
+	title = item.title
+	if title.endswith(source):
+		title = title[:-(source.len+3)]
 	n = NewsArticle ( post_id = item.id,
-		title = item.title,
+		title = title,
 		pub_date = getPubDate(item.published_parsed),
 		summary = summaryText,
 		img_src = img_src,
