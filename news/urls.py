@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from rest_framework import routers, serializers, viewsets
+from rest_framework import routers, serializers, viewsets, pagination
 from .models import NewsArticle
 from . import views
 
@@ -9,10 +9,16 @@ class NewsArticleSerializer(serializers.HyperlinkedModelSerializer):
         model = NewsArticle 
         fields = ('title', 'pub_date', 'summary', 'img_src', 'source', 'url')
 
+class StandardResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
 # ViewSets define the view behavior.
 class NewsArticleViewSet(viewsets.ModelViewSet):
     queryset = NewsArticle.objects.all().order_by('-pub_date')
     serializer_class = NewsArticleSerializer
+    pagination_class = StandardResultsSetPagination
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
