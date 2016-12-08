@@ -29,7 +29,7 @@ def processFeedItem(item):
 	url = parseFeedUrl(item.link)
 	title = item.title
 	if title.endswith(source):
-		title = title[:-(source.len+3)]
+		title = title[:-(len(source) + 3)]
 	n = NewsArticle ( post_id = item.id,
 		title = title,
 		pub_date = getPubDate(item.published_parsed),
