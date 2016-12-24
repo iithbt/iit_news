@@ -16,6 +16,7 @@ def main():
 	for item in feed.entries:
 		if processFeedItem(item):
 			count += 1
+	print ("count",count)
 	return count
 
 def loadfeed(url):

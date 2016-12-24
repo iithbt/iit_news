@@ -15,3 +15,15 @@ class NewsArticle(models.Model):
 
 	def __str__(self):
 		return self.title
+
+@python_2_unicode_compatible
+class FcmDetails(models.Model):
+	token = models.CharField(max_length=300)
+	date = models.DateTimeField('date registered')
+	ip = models.CharField(max_length=16)
+	browser = models.CharField(max_length=50)
+	os = models.CharField(max_length=50)
+	device = models.CharField(max_length=50)
+
+	def __str__(self):
+		return self.token
