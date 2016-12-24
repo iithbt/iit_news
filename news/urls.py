@@ -27,5 +27,6 @@ router.register(r'api', NewsArticleViewSet)
 urlpatterns = [
 	url(r'^$', views.index, name="news_index"),
 	url(r'^fetch$', views.fetch, name="news_fetch"),
+    url(r'^notif_reg', views.reg_notif, name="notif_reg"),
 	url(r'^', include(router.urls)),
 ]
