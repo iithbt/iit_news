@@ -19,7 +19,7 @@ def reg_notif(request):
 		token = request.GET['token']
 		if len(token)>0 :
 			browser, os, device = notif_reg.getUserDetails(request)
-			fcm_user = FcmDetails (
+			fcm_user = User (
 				token = token,
 				date = datetime.now(),
 				ip = notif_reg.get_client_ip(request),
