@@ -40,7 +40,7 @@ def processFeedItem(item):
 		url = url,
 		source = source)
 	n.save()
-	sendNotification(title, summaryText, url, img_src)
+	sendNotification(title, summaryText, url, img_src if img_src else "/images/favicon-128.png")
 	return True
 
 def sendNotification(title, body, url, icon_url):
