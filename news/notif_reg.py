@@ -11,7 +11,9 @@ def get_client_ip(request):
 
 def regiter_token_for_topic(token):
  	url = 'https://iid.googleapis.com/iid/v1/'+ token +'/rel/topics/iitnews'
- 	headers = {'Authorization': 'key=AIzaSyDNCsH4twaJc5JT5dZrq77JYkB0MhoIE2E'}
+ 	headers = {'Authorization': 'key=AAAA8Vstr2U:APA91bGMpzQlTdM96Xt5HwBDmy_jubWoIyPBG9_ZJZUVMHJctl-'
+		+'hBP5MZ35aeUTnNOR5o8sJfy5i5FyPU_QUt2KySzVDQCnEf_leOcni31iwC17_bpMD24ptoOrjMDwwfcQ9pOx'
+		+'TIXBRfAKz_DV3_oZ6cpkbbP_fuA'}
  	r = requests.post(url, headers=headers)
  	return r.status_code
 

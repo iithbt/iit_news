@@ -5,8 +5,8 @@ from django.utils import timezone
 from .models import NewsArticle
 from feedparser import parse
 import requests
-
 import sys
+import json
 
 def main():
 	reload(sys)
@@ -46,7 +46,9 @@ def processFeedItem(item):
 def sendNotification(title, body, url, icon_url):
 	fcm_url = "https://fcm.googleapis.com/fcm/send"
 	headers = {
-		'Authorization': 'key=AIzaSyDNCsH4twaJc5JT5dZrq77JYkB0MhoIE2E',
+		'Authorization': 'key=AAAA8Vstr2U:APA91bGMpzQlTdM96Xt5HwBDmy_jubWoIyPBG9_ZJZUVMHJctl-'
+		+'hBP5MZ35aeUTnNOR5o8sJfy5i5FyPU_QUt2KySzVDQCnEf_leOcni31iwC17_bpMD24ptoOrjMDwwfcQ9pOx'
+		+'TIXBRfAKz_DV3_oZ6cpkbbP_fuA',
 		'Content-Type':'application/json',
 		}
 	payload = { 
@@ -58,7 +60,8 @@ def sendNotification(title, body, url, icon_url):
   		},
   		"to" : "/topics/iitnews"
 	}
-	r = requests.post(fcm_url, headers=headers, data=payload)
+	r = requests.post(fcm_url, headers=headers, data=json.dumps(payload))
+	return r.text
 
 def getPubDate(time_struct):
 	return datetime.fromtimestamp(mktime(time_struct),timezone.utc)
