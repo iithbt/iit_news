@@ -13,7 +13,7 @@ def regiter_token_for_topic(token):
  	url = 'https://iid.googleapis.com/iid/v1/'+ token +'/rel/topics/iitnews'
  	headers = {'Authorization': 'key=AIzaSyDNCsH4twaJc5JT5dZrq77JYkB0MhoIE2E'}
  	r = requests.post(url, headers=headers)
- 	return r.status
+ 	return r.status_code
 
 def getUserDetails(request):
 	ua_string = request.META.get('HTTP_USER_AGENT')
