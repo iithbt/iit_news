@@ -17,7 +17,7 @@ class NewsArticle(models.Model):
 		return self.title
 
 @python_2_unicode_compatible
-class FcmDetails(models.Model):
+class User(models.Model):
 	token = models.CharField(max_length=300)
 	date = models.DateTimeField('date registered')
 	ip = models.CharField(max_length=16)

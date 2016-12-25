@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from django.http import HttpResponse
 from . import grab_feed, notif_reg
-from .models import FcmDetails
+from .models import User
 import threading
 from datetime import datetime
 
