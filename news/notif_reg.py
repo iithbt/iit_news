@@ -1,4 +1,4 @@
-import requests
+import requests, os
 from user_agents import parse
 
 def get_client_ip(request):
@@ -10,10 +10,8 @@ def get_client_ip(request):
     return ip
 
 def regiter_token_for_topic(token):
- 	url = 'https://iid.googleapis.com/iid/v1/'+ token +'/rel/topics/iitnews'
- 	headers = {'Authorization': 'key=AAAA8Vstr2U:APA91bGMpzQlTdM96Xt5HwBDmy_jubWoIyPBG9_ZJZUVMHJctl-'
-		+'hBP5MZ35aeUTnNOR5o8sJfy5i5FyPU_QUt2KySzVDQCnEf_leOcni31iwC17_bpMD24ptoOrjMDwwfcQ9pOx'
-		+'TIXBRfAKz_DV3_oZ6cpkbbP_fuA'}
+ 	url = 'https://iid.googleapis.com/iid/v1/'+ token +'/rel/topics/' + os.environ['FCM_TOPIC']
+ 	headers = {'Authorization': os.environ['FCM_AUTH_KEY']}
  	r = requests.post(url, headers=headers)
  	return r.status_code
 

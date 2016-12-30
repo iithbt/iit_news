@@ -4,15 +4,13 @@ from datetime import datetime
 from django.utils import timezone
 from .models import NewsArticle
 from feedparser import parse
-import requests
-import sys
-import json
+import requests, sys, json, os
 
 def main():
 	reload(sys)
 	sys.setdefaultencoding('utf-8')
 	count = 0
-	url = 'https://news.google.co.in/news?q=iit&hl=en&gl=in&output=rss'
+	url = os.environ['NEWS_FETCH_URL']
 	feed = loadfeed(url)
 	for item in feed.entries:
 		if processFeedItem(item):
@@ -46,9 +44,7 @@ def processFeedItem(item):
 def sendNotification(title, body, url, icon_url):
 	fcm_url = "https://fcm.googleapis.com/fcm/send"
 	headers = {
-		'Authorization': 'key=AAAA8Vstr2U:APA91bGMpzQlTdM96Xt5HwBDmy_jubWoIyPBG9_ZJZUVMHJctl-'
-		+'hBP5MZ35aeUTnNOR5o8sJfy5i5FyPU_QUt2KySzVDQCnEf_leOcni31iwC17_bpMD24ptoOrjMDwwfcQ9pOx'
-		+'TIXBRfAKz_DV3_oZ6cpkbbP_fuA',
+		'Authorization': os.environ['FCM_AUTH_KEY'],
 		'Content-Type':'application/json',
 		}
 	payload = { 
@@ -58,7 +54,7 @@ def sendNotification(title, body, url, icon_url):
     		"icon" : icon_url,
     		"click_action" : url,
   		},
-  		"to" : "/topics/iitnews",
+  		"to" : '/topics/' + os.environ['FCM_TOPIC'],
   		"time_to_live" : 86400 # Equivalent to 1 day
 	}
 	r = requests.post(fcm_url, headers=headers, data=json.dumps(payload))
