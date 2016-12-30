@@ -58,7 +58,8 @@ def sendNotification(title, body, url, icon_url):
     		"icon" : icon_url,
     		"click_action" : url,
   		},
-  		"to" : "/topics/iitnews"
+  		"to" : "/topics/iitnews",
+  		"time_to_live" : 86400 # Equivalent to 1 day
 	}
 	r = requests.post(fcm_url, headers=headers, data=json.dumps(payload))
 	return r.text
